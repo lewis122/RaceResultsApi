@@ -1,0 +1,6 @@
+.notes-row td { background: #fafafa; }
+.notes { display: grid; gap: .75rem; }
+.add { display: grid; gap: .5rem; }
+.add textarea { width: 100%; }
+.item { padding: .5rem; border: 1px solid #eee; border-radius: .5rem; background: #fff; }
+.meta { font-size: .8rem; color: #666; margin-bottom: .25rem; }

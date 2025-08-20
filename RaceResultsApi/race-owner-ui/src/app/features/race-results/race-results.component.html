@@ -1,0 +1,56 @@
+<h3>Race Results</h3>
+
+<table class="grid">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Course</th>
+    <th>Dist</th>
+    <th>Jockey</th>
+    <th>Pos</th>
+    <th>Beaten</th>
+    <th>Time Beaten</th>
+    <th>Notes</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <ng-container *ngFor="let r of results; trackBy: trackById">
+    <tr>
+      <td>{{ r.race?.raceDate | date:'mediumDate' }}</td>
+      <td>{{ r.race?.raceTime }}</td>
+      <td>{{ r.race?.racecourse }}</td>
+      <td>{{ r.race?.raceDistance }}</td>
+      <td>{{ r.jockey?.name }}</td>
+      <td>{{ r.finishingPosition }}</td>
+      <td>{{ r.distanceBeaten ?? '—' }}</td>
+      <td>{{ r.timeBeaten ?? '—' }}</td>
+      <td>
+        <button (click)="toggleNotes(r)">
+          {{ expandedRowId === r.raceResultId ? 'Hide' : 'View' }}
+        </button>
+      </td>
+    </tr>
+
+    <tr *ngIf="expandedRowId === r.raceResultId" class="notes-row">
+      <td colspan="9">
+        <div class="notes">
+          <div class="add">
+            <textarea [(ngModel)]="newNoteText" rows="3" placeholder="Add note about this run…"></textarea>
+            <button (click)="addNote(r)">Save Note</button>
+          </div>
+
+          <div class="list" *ngIf="notesCache.get(r.raceResultId)?.length; else noNotes">
+            <div class="item" *ngFor="let n of notesCache.get(r.raceResultId)">
+              <div class="meta">{{ n.createdAt | date:'short' }}</div>
+              <div class="text">{{ n.noteText }}</div>
+            </div>
+          </div>
+          <ng-template #noNotes><em>No notes yet.</em></ng-template>
+        </div>
+      </td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>

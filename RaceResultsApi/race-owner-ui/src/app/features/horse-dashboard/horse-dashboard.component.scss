@@ -1,0 +1,5 @@
+.page { padding: 1rem; }
+.controls { margin: 1rem 0; display: flex; gap: 1rem; align-items: center; }
+.grid { width: 100%; border-collapse: collapse; }
+.grid th, .grid td { border: 1px solid #ddd; padding: .5rem; }
+.grid thead { background: #f7f7f7; }

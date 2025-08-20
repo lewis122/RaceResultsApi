@@ -1,0 +1,40 @@
+<div class="page">
+  <h2>Horse Dashboard</h2>
+
+  <div class="controls">
+    <label>Select Horse:</label>
+    <select (change)="onSelectHorse($event.target.value)">
+      <option value="">-- choose --</option>
+      <option *ngFor="let h of horses" [value]="h.horseId">{{ h.name }}</option>
+    </select>
+  </div>
+
+  <div *ngIf="loading">Loading…</div>
+
+  <section *ngIf="!loading && selectedHorseId && jockeyTable.length">
+    <h3>Best Jockey (based on your horse’s history)</h3>
+    <table class="grid">
+      <thead>
+      <tr>
+        <th>Jockey</th><th>Runs</th><th>Wins</th><th>Places</th><th>Avg Pos</th><th>Avg Dist Beaten</th><th>Score</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let s of jockeyTable | slice:0:5"> <!-- top 5 -->
+        <td>{{ s.jockeyName }}</td>
+        <td>{{ s.runs }}</td>
+        <td>{{ s.wins }}</td>
+        <td>{{ s.places }}</td>
+        <td>{{ s.avgPos }}</td>
+        <td>{{ s.avgBeaten ?? '—' }}</td>
+        <td>{{ s.score }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <app-race-results
+    *ngIf="!loading && selectedHorseId"
+    [results]="results">
+  </app-race-results>
+</div>
