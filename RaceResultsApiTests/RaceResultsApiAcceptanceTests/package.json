@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.1.0",
+    "@types/jest": "^30.0.0",
+    "@types/supertest": "^6.0.3",
+    "supertest": "^7.1.4"
+  },
+  "dependencies": {
+    "mocha": "^11.7.1"
+  }
+}
